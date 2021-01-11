@@ -1,6 +1,6 @@
 # Single Player Game
 
-A single-player guessing game, written in C#
+A C# single-player guessing game.
 
 *Author: Na'ama Bar-Ilan*
 
