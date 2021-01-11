@@ -1,4 +1,4 @@
-# Single Player Game
+# Single Player Guessing Game
 
 A C# single-player guessing game.
 
