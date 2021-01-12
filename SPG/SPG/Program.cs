@@ -13,7 +13,6 @@ namespace SPG
 
             PlayOneGame("PROGRAMER");
             //displayHangman();
-            //createHint();
             //readGuess();
             //getRandomWord();
             //stats();
@@ -44,21 +43,19 @@ namespace SPG
         {
             int guessesCounter = 8;
             StringBuilder guessedLetters = new StringBuilder();
-            string hint = "--------";
+            string CreateHint = "--------";
 
 
             while (guessesCounter > 0)
             {
-                Console.WriteLine($"Secret word: {hint}");
+                Console.WriteLine($"Secret word: {CreateHint}");
                 Console.WriteLine($"Your guesses: {guessedLetters}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
                 Console.WriteLine($"Your guess? ");
 
                 string userInput = Console.ReadLine();
 
-                // convert user input from string into upper case char
-                //char upperInput = Convert.ToChar(userInput.ToUpper());
-
+                // case-insensitive - convert user input to upper case 
                 string upperInput = userInput.ToUpper();
 
                 // append user input to guessed letters string
@@ -69,6 +66,11 @@ namespace SPG
             
 
             return guessesCounter;
+
+        }
+
+        static string CreateHint(string secretWord, string guessedLetters)
+        {
 
         }
     }
