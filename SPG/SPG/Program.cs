@@ -1,4 +1,5 @@
-﻿   using System;
+﻿using System;
+using System.Text;
 
 namespace SPG
 {
@@ -7,17 +8,22 @@ namespace SPG
         static void Main(string[] args)
         {
             Intro();
-            //playOneGame();
+            Console.ReadLine();
+            Console.Clear();
+
+            PlayOneGame("PROGRAMER");
             //displayHangman();
-            //createHint();
             //readGuess();
             //getRandomWord();
             //stats();
         }
 
+        /// <summary>
+        /// Prints the program introduction to the player.
+        /// </summary>
         static void Intro()
         {
-            Console.WriteLine("Welcome to the Guessing game! \n" +
+            Console.WriteLine("Welcome to the Guessing game! \n\n" +
                               "I will think of a random word. \n" +
                               "You'll try to guess its letters.\n" +
                               "Every time you guess a letter \n" +
@@ -25,6 +31,52 @@ namespace SPG
                               "part of the person appears. \n" +
                               "Guess correctly to win!"
                               );
+        }
+
+        /// <summary>
+        /// Plays a single game with the user from start to finish.
+        /// </summary>
+        /// <param name="secretWord">The secret word for the user to guess</param>
+        /// <returns>The number of guesses the player had remaining at the end of the game, 
+        /// or 0 if the player lost the game</returns>
+        static int PlayOneGame(string secretWord)
+        {
+            int guessesCounter = 8;
+            StringBuilder guessedLettersBuilder = new StringBuilder();
+            string guessedLetters = guessedLettersBuilder.ToString();
+            string CreateHint = "--------";
+
+
+            while (guessesCounter > 0)
+            {
+                Console.WriteLine($"Secret word: {CreateHint}");
+                Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
+                Console.WriteLine($"Guesses left: {guessesCounter}");
+                Console.WriteLine($"Your guess? ");
+
+                string userInput = Console.ReadLine();
+
+                // case-insensitive - convert user input to upper case 
+                string upperInput = userInput.ToUpper();
+
+                // append user input to guessed letters string
+                guessedLettersBuilder.Append(upperInput);
+
+                guessesCounter--;
+            }
+            
+            return guessesCounter;
+        }
+
+        /// <summary>
+        /// Creates and returns a hint string
+        /// </summary>
+        /// <param name="secretWord">The secret word that the user is trying to guess</param>
+        /// <param name="guessedLetters">The set of letters that already been guessed</param>
+        /// <returns>A version of the secret word that reveals any guessed letters but shows dashes in place of all other letters</returns>
+        static string CreateHint(string secretWord, string guessedLetters)
+        {
+
         }
     }
 }
