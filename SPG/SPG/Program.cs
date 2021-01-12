@@ -43,8 +43,7 @@ namespace SPG
         static int PlayOneGame(string secretWord)
         {
             int guessesCounter = 8;
-            StringBuilder builder = new StringBuilder();
-            string guessedLetters = builder.ToString();
+            StringBuilder guessedLetters = new StringBuilder();
             string hint = "--------";
 
 
@@ -53,7 +52,6 @@ namespace SPG
                 Console.WriteLine($"Secret word: {hint}");
                 Console.WriteLine($"Your guesses: {guessedLetters}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
-                Console.WriteLine(guessedLetters);
                 Console.WriteLine($"Your guess? ");
 
                 string userInput = Console.ReadLine();
@@ -64,7 +62,7 @@ namespace SPG
                 string upperInput = userInput.ToUpper();
 
                 // append user input to guessed letters string
-                builder.Append(upperInput);
+                guessedLetters.Append(upperInput);
 
                 guessesCounter--;
             }
