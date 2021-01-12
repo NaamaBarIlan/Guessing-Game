@@ -42,14 +42,15 @@ namespace SPG
         static int PlayOneGame(string secretWord)
         {
             int guessesCounter = 8;
-            StringBuilder guessedLetters = new StringBuilder();
+            StringBuilder guessedLettersBuilder = new StringBuilder();
+            string guessedLetters = guessedLettersBuilder.ToString();
             string CreateHint = "--------";
 
 
             while (guessesCounter > 0)
             {
                 Console.WriteLine($"Secret word: {CreateHint}");
-                Console.WriteLine($"Your guesses: {guessedLetters}");
+                Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
                 Console.WriteLine($"Your guess? ");
 
@@ -59,16 +60,20 @@ namespace SPG
                 string upperInput = userInput.ToUpper();
 
                 // append user input to guessed letters string
-                guessedLetters.Append(upperInput);
+                guessedLettersBuilder.Append(upperInput);
 
                 guessesCounter--;
             }
             
-
             return guessesCounter;
-
         }
 
+        /// <summary>
+        /// Creates and returns a hint string
+        /// </summary>
+        /// <param name="secretWord">The secret word that the user is trying to guess</param>
+        /// <param name="guessedLetters">The set of letters that already been guessed</param>
+        /// <returns>A version of the secret word that reveals any guessed letters but shows dashes in place of all other letters</returns>
         static string CreateHint(string secretWord, string guessedLetters)
         {
 
