@@ -76,6 +76,14 @@ namespace SPG
         /// <returns>A version of the secret word that reveals any guessed letters but shows dashes in place of all other letters</returns>
         static string CreateHint(string secretWord, string guessedLetters)
         {
+            // convert secretWord into a string of dashes
+             
+            char[] wordLength = new char[secretWord.Length];
+
+            // join the char array into a string
+            string hint = "";
+
+            return hint;
 
         }
     }
