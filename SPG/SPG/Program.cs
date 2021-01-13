@@ -81,15 +81,13 @@ namespace SPG
         {
             StringBuilder hintBuilder = new StringBuilder();
 
-            char[] guessedLettersCharArray = guessedLetters.ToCharArray();            
-
             foreach (char item in secretWord)
             {
                 bool charMatch = false;
 
                 for (int i = 0; i < guessedLetters.Length; i++)
                 {
-                    if (item.Equals(guessedLettersCharArray[i]))
+                    if (item.Equals(guessedLetters[i]))
                     {
                         charMatch = true;
                     }
@@ -107,6 +105,7 @@ namespace SPG
 
             string hint = hintBuilder.ToString();
 
+            // To test the hint:
             //Console.WriteLine(hint);
 
             return hint;
