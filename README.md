@@ -35,6 +35,9 @@ Then select and open ```SPG.sln```
 ---
 
 ### Change Log
+
+1.2: *Added hints* - 11 Jan 2021 
+1.1: *Added game intro and play one game* - 11 Jan 2021 
 1.0: *Project Setup* - 10 Jan 2021  
 
 
