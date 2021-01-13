@@ -11,7 +11,11 @@ namespace SPG
             Console.ReadLine();
             Console.Clear();
 
-            PlayOneGame("PROGRAMER");
+            //Testing the hint:
+            //CreateHint("PROGRAMMER", "R");
+            //Console.ReadLine();
+
+            //PlayOneGame("PROGRAMER");
             //displayHangman();
             //readGuess();
             //getRandomWord();
@@ -76,14 +80,48 @@ namespace SPG
         /// <returns>A version of the secret word that reveals any guessed letters but shows dashes in place of all other letters</returns>
         static string CreateHint(string secretWord, string guessedLetters)
         {
-            // convert secretWord into a string of dashes
-             
-            char[] wordLength = new char[secretWord.Length];
+            StringBuilder hintBuilder = new StringBuilder();
 
-            // join the char array into a string
-            string hint = "";
+            foreach (char item in secretWord)
+            {
+                bool charMatch = false;
+
+                for (int i = 0; i < guessedLetters.Length; i++)
+                {
+                    if (item.Equals(guessedLetters[i]))
+                    {
+                        charMatch = true;
+                    }
+                }
+
+                if (charMatch)
+                {
+                    hintBuilder.Append(item);
+                }
+                else
+                {
+                    hintBuilder.Append("-");
+                }
+            }
+
+            string hint = hintBuilder.ToString();
+
+            // To test the hint:
+            //Console.WriteLine(hint);
 
             return hint;
+        }
+
+        /// <summary>
+        /// Prompts the user to type a single letter to guess,
+        /// and returns the letter typed as an uppercase char.
+        /// Re-prompts the user until they type a string that is a single letter
+        /// from A-Z, case insensitive, that has not been guessed before.
+        /// </summary>
+        /// <param name="guessedLetters">A string representing all letters that have already been guessed</param>
+        /// <returns></returns>
+        static char ReadGuess(string guessedLetters)
+        {
 
         }
     }
