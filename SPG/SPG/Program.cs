@@ -11,7 +11,10 @@ namespace SPG
             Console.ReadLine();
             Console.Clear();
 
-            PlayOneGame("PROGRAMER");
+            //CreateHint("PROGRAMMER", "R");
+            //Console.ReadLine();
+
+            //PlayOneGame("PROGRAMER");
             //displayHangman();
             //readGuess();
             //getRandomWord();
@@ -76,15 +79,37 @@ namespace SPG
         /// <returns>A version of the secret word that reveals any guessed letters but shows dashes in place of all other letters</returns>
         static string CreateHint(string secretWord, string guessedLetters)
         {
-            // convert secretWord into a string of dashes
-             
-            char[] wordLength = new char[secretWord.Length];
+            StringBuilder hintBuilder = new StringBuilder();
 
-            // join the char array into a string
-            string hint = "";
+            char[] guessedLettersCharArray = guessedLetters.ToCharArray();            
+
+            foreach (char item in secretWord)
+            {
+                bool charMatch = false;
+
+                for (int i = 0; i < guessedLetters.Length; i++)
+                {
+                    if (item.Equals(guessedLettersCharArray[i]))
+                    {
+                        charMatch = true;
+                    }
+                }
+
+                if (charMatch)
+                {
+                    hintBuilder.Append(item);
+                }
+                else
+                {
+                    hintBuilder.Append("-");
+                }
+            }
+
+            string hint = hintBuilder.ToString();
+
+            //Console.WriteLine(hint);
 
             return hint;
-
         }
     }
 }
