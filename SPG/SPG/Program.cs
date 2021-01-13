@@ -11,6 +11,7 @@ namespace SPG
             Console.ReadLine();
             Console.Clear();
 
+            //Testing the hint:
             //CreateHint("PROGRAMMER", "R");
             //Console.ReadLine();
 
@@ -109,6 +110,19 @@ namespace SPG
             //Console.WriteLine(hint);
 
             return hint;
+        }
+
+        /// <summary>
+        /// Prompts the user to type a single letter to guess,
+        /// and returns the letter typed as an uppercase char.
+        /// Re-prompts the user until they type a string that is a single letter
+        /// from A-Z, case insensitive, that has not been guessed before.
+        /// </summary>
+        /// <param name="guessedLetters">A string representing all letters that have already been guessed</param>
+        /// <returns></returns>
+        static char ReadGuess(string guessedLetters)
+        {
+
         }
     }
 }
