@@ -14,11 +14,11 @@ namespace SPG
 
             PlayOneGame("PROGRAMER");
 
-            //Testing the hint:
+            //Testing CreateHint:
             //CreateHint("PROGRAMMER", "R");
             //Console.ReadLine();
 
-            //Testing:
+            //Testing ReadGuess:
             //ReadGuess("TO");
 
 
