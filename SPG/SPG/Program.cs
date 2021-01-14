@@ -130,7 +130,7 @@ namespace SPG
             {
                 Console.WriteLine($"Your guess? ");
 
-                char userInput = char.Parse(Console.ReadLine());
+                char userInput = char.Parse(Console.ReadLine().ToUpper());
 
                 if (!Char.IsLetter(userInput))
                 {
@@ -151,6 +151,13 @@ namespace SPG
 
         }
 
+        /// <summary>
+        /// Compares the letter that the user guessed to
+        /// the string of letters that were guessed in previous turns.
+        /// </summary>
+        /// <param name="guessedLetters">A string of all the letter the user guessed in the current game</param>
+        /// <param name="guess">The letter the user guessed in the current turn</param>
+        /// <returns>True if the letter exists in the string and therefor already guessed</returns>
         static bool AlreadyGuessed(string guessedLetters, char guess)
         {
             for (int i = 0; i < guessedLetters.Length; i++)
