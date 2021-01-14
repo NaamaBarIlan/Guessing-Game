@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace SPG
@@ -11,13 +12,17 @@ namespace SPG
             Console.ReadLine();
             Console.Clear();
 
-            //Testing the hint:
+            PlayOneGame("PROGRAMER");
+
+            //Testing CreateHint:
             //CreateHint("PROGRAMMER", "R");
             //Console.ReadLine();
 
-            //PlayOneGame("PROGRAMER");
+            //Testing ReadGuess:
+            //ReadGuess("TO");
+
+
             //displayHangman();
-            //readGuess();
             //getRandomWord();
             //stats();
         }
@@ -48,12 +53,12 @@ namespace SPG
             int guessesCounter = 8;
             StringBuilder guessedLettersBuilder = new StringBuilder();
             string guessedLetters = guessedLettersBuilder.ToString();
-            string CreateHint = "--------";
+            //string CreateHint = "--------";
 
 
             while (guessesCounter > 0)
             {
-                Console.WriteLine($"Secret word: {CreateHint}");
+                Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLetters)}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
                 Console.WriteLine($"Your guess? ");
@@ -122,7 +127,52 @@ namespace SPG
         /// <returns></returns>
         static char ReadGuess(string guessedLetters)
         {
+            bool inputReadable = false;
+            char guess = '\0';
 
+            while (!inputReadable)
+            {
+                Console.WriteLine($"Your guess? ");
+
+                char userInput = char.Parse(Console.ReadLine().ToUpper());
+
+                if (!Char.IsLetter(userInput))
+                {
+                    Console.WriteLine($"Type a single letter from A-Z.");
+                }
+                else if(AlreadyGuessed(guessedLetters, userInput))
+                {
+                    Console.WriteLine($"You already guessed that letter.");
+                }
+                else
+                {
+                    inputReadable = true;
+                    guess = userInput;
+                }
+
+            }
+
+            return guess;
+        }
+
+        /// <summary>
+        /// Compares the letter that the user guessed to
+        /// the string of letters that were guessed in previous turns.
+        /// </summary>
+        /// <param name="guessedLetters">A string of all the letter the user guessed in the current game</param>
+        /// <param name="guess">The letter the user guessed in the current turn</param>
+        /// <returns>True if the letter exists in the string and therefor already guessed</returns>
+        static bool AlreadyGuessed(string guessedLetters, char guess)
+        {
+            for (int i = 0; i < guessedLetters.Length; i++)
+            {
+                if (guess.Equals(guessedLetters[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
