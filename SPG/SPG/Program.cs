@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace SPG
@@ -16,8 +17,9 @@ namespace SPG
             //Console.ReadLine();
 
             //PlayOneGame("PROGRAMER");
+
             //displayHangman();
-            //readGuess();
+            ReadGuess("TO");
             //getRandomWord();
             //stats();
         }
@@ -120,8 +122,28 @@ namespace SPG
         /// </summary>
         /// <param name="guessedLetters">A string representing all letters that have already been guessed</param>
         /// <returns></returns>
-        static char ReadGuess(string guessedLetters)
+        static void ReadGuess(string guessedLetters)
         {
+            bool inputReadable = false;
+
+            while (!inputReadable)
+            {
+                Console.WriteLine($"Your guess? ");
+
+                char userInput = char.Parse(Console.ReadLine());
+
+                if (!Char.IsLetter(userInput))
+                {
+                    Console.WriteLine($"Type a single letter from A-Z ");
+                }
+                else
+                {
+                    inputReadable = true;
+                    Console.WriteLine("true");
+                    //return userInput;
+                }
+
+            }
 
         }
     }
