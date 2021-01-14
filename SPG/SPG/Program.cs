@@ -134,17 +134,34 @@ namespace SPG
 
                 if (!Char.IsLetter(userInput))
                 {
-                    Console.WriteLine($"Type a single letter from A-Z ");
+                    Console.WriteLine($"Type a single letter from A-Z.");
+                }
+                else if(AlreadyGuessed(guessedLetters, userInput))
+                {
+                    Console.WriteLine($"You already guessed that letter.");
                 }
                 else
                 {
                     inputReadable = true;
-                    Console.WriteLine("true");
+                    Console.WriteLine("correct");
                     //return userInput;
                 }
 
             }
 
+        }
+
+        static bool AlreadyGuessed(string guessedLetters, char guess)
+        {
+            for (int i = 0; i < guessedLetters.Length; i++)
+            {
+                if (guess.Equals(guessedLetters[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
