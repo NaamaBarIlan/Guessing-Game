@@ -12,14 +12,17 @@ namespace SPG
             Console.ReadLine();
             Console.Clear();
 
+            PlayOneGame("PROGRAMER");
+
             //Testing the hint:
             //CreateHint("PROGRAMMER", "R");
             //Console.ReadLine();
 
-            //PlayOneGame("PROGRAMER");
+            //Testing:
+            //ReadGuess("TO");
+
 
             //displayHangman();
-            ReadGuess("TO");
             //getRandomWord();
             //stats();
         }
@@ -50,12 +53,12 @@ namespace SPG
             int guessesCounter = 8;
             StringBuilder guessedLettersBuilder = new StringBuilder();
             string guessedLetters = guessedLettersBuilder.ToString();
-            string CreateHint = "--------";
+            //string CreateHint = "--------";
 
 
             while (guessesCounter > 0)
             {
-                Console.WriteLine($"Secret word: {CreateHint}");
+                Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLetters)}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
                 Console.WriteLine($"Your guess? ");
@@ -122,9 +125,10 @@ namespace SPG
         /// </summary>
         /// <param name="guessedLetters">A string representing all letters that have already been guessed</param>
         /// <returns></returns>
-        static void ReadGuess(string guessedLetters)
+        static char ReadGuess(string guessedLetters)
         {
             bool inputReadable = false;
+            char guess = '\0';
 
             while (!inputReadable)
             {
@@ -143,12 +147,12 @@ namespace SPG
                 else
                 {
                     inputReadable = true;
-                    Console.WriteLine("correct");
-                    //return userInput;
+                    guess = userInput;
                 }
 
             }
 
+            return guess;
         }
 
         /// <summary>
