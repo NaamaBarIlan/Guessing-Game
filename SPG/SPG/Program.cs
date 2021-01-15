@@ -8,11 +8,11 @@ namespace SPG
     {
         static void Main(string[] args)
         {
-            Intro();
-            Console.ReadLine();
-            Console.Clear();
+            //Intro();
+            //Console.ReadLine();
+            //Console.Clear();
 
-            PlayOneGame("PROGRAMER");
+            PlayOneGame("PRO");
 
             //Testing CreateHint:
             //CreateHint("PROGRAMMER", "R");
@@ -52,24 +52,16 @@ namespace SPG
         {
             int guessesCounter = 8;
             StringBuilder guessedLettersBuilder = new StringBuilder();
-            string guessedLetters = guessedLettersBuilder.ToString();
-            //string CreateHint = "--------";
-
 
             while (guessesCounter > 0)
             {
-                Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLetters)}");
+                Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
-                Console.WriteLine($"Your guess? ");
+                
+                char userGuess = ReadGuess(guessedLettersBuilder.ToString());
 
-                string userInput = Console.ReadLine();
-
-                // case-insensitive - convert user input to upper case 
-                string upperInput = userInput.ToUpper();
-
-                // append user input to guessed letters string
-                guessedLettersBuilder.Append(upperInput);
+                guessedLettersBuilder.Append(userGuess);
 
                 guessesCounter--;
             }
@@ -132,26 +124,24 @@ namespace SPG
 
             while (!inputReadable)
             {
-                Console.WriteLine($"Your guess? ");
+                Console.WriteLine("Your guess? ");
 
                 char userInput = char.Parse(Console.ReadLine().ToUpper());
 
                 if (!Char.IsLetter(userInput))
                 {
-                    Console.WriteLine($"Type a single letter from A-Z.");
+                    Console.WriteLine("Type a single letter from A-Z.");
                 }
                 else if(AlreadyGuessed(guessedLetters, userInput))
                 {
-                    Console.WriteLine($"You already guessed that letter.");
+                    Console.WriteLine("You already guessed that letter.");
                 }
                 else
                 {
                     inputReadable = true;
                     guess = userInput;
                 }
-
             }
-
             return guess;
         }
 
@@ -173,6 +163,29 @@ namespace SPG
             }
 
             return false;
+        }
+
+        static void GuessFeedback(string secretWord, char guess)
+        {
+            bool correctGuess = false;
+
+            for (int i = 0; i < secretWord.Length; i++)
+            {
+                if (guess.Equals(secretWord[i]))
+                {
+                    correctGuess = true;
+                }
+            }
+
+            if (correctGuess)
+            {
+                Console.WriteLine("Correct!");
+            }
+            else
+            {
+                Console.WriteLine("Incorrect.");
+            }
+
         }
     }
 }
