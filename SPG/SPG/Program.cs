@@ -61,6 +61,8 @@ namespace SPG
                 
                 char userGuess = ReadGuess(guessedLettersBuilder.ToString());
 
+                GuessFeedback(secretWord, userGuess);
+
                 guessedLettersBuilder.Append(userGuess);
 
                 guessesCounter--;
