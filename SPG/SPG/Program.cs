@@ -14,6 +14,7 @@ namespace SPG
 
             PlayOneGame("PRO");
 
+            //TODO
             //displayHangman();
             //getRandomWord();
             //stats();
@@ -46,7 +47,7 @@ namespace SPG
             bool userWins = false;
             StringBuilder guessedLettersBuilder = new StringBuilder();
 
-            while (guessesCounter > 0 && !userWins)
+            while (guessesCounter > 0 || !userWins)
             {
                 Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
@@ -58,7 +59,11 @@ namespace SPG
 
                 guessedLettersBuilder.Append(userGuess);
 
-                // if guessedLettersBuilder has no dashes, user won
+                if (UserWins(CreateHint(secretWord, guessedLettersBuilder.ToString())))
+                {
+                    userWins = true;
+                    Console.WriteLine($"You win! My word was {secretWord}");
+                }
 
                 guessesCounter--;
             }
@@ -189,6 +194,28 @@ namespace SPG
                 Console.WriteLine("Incorrect.");
             }
 
+        }
+
+        /// <summary>
+        /// Checks if the user has won the game by
+        /// checking if the hint has any dashes. 
+        /// </summary>
+        /// <param name="hint"></param>
+        /// <returns>true if the user has won the game, or false if they did not</returns>
+        static bool UserWins(string hint)
+        {
+            bool userWins = true;
+
+            for (int i = 0; i < hint.Length; i++)
+            {
+                if (hint[i].Equals("-"))
+                {
+                    userWins = false;
+                    break;
+                }
+            }
+
+            return userWins;
         }
     }
 }
