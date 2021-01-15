@@ -14,14 +14,6 @@ namespace SPG
 
             PlayOneGame("PRO");
 
-            //Testing CreateHint:
-            //CreateHint("PROGRAMMER", "R");
-            //Console.ReadLine();
-
-            //Testing ReadGuess:
-            //ReadGuess("TO");
-
-
             //displayHangman();
             //getRandomWord();
             //stats();
@@ -51,9 +43,10 @@ namespace SPG
         static int PlayOneGame(string secretWord)
         {
             int guessesCounter = 8;
+            bool userWins = false;
             StringBuilder guessedLettersBuilder = new StringBuilder();
 
-            while (guessesCounter > 0)
+            while (guessesCounter > 0 && !userWins)
             {
                 Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
@@ -61,9 +54,11 @@ namespace SPG
                 
                 char userGuess = ReadGuess(guessedLettersBuilder.ToString());
 
-                GuessFeedback(secretWord, userGuess);
+                GuessEval(secretWord, userGuess);
 
                 guessedLettersBuilder.Append(userGuess);
+
+                // if guessedLettersBuilder has no dashes, user won
 
                 guessesCounter--;
             }
@@ -167,7 +162,13 @@ namespace SPG
             return false;
         }
 
-        static void GuessFeedback(string secretWord, char guess)
+        /// <summary>
+        /// Evaluates the letter the user guessed and
+        /// prints out feedback to the console.
+        /// </summary>
+        /// <param name="secretWord">The secret word for the user to guess</param>
+        /// <param name="guess">The letter that the user entered in the current turn</param>
+        static void GuessEval(string secretWord, char guess)
         {
             bool correctGuess = false;
 
