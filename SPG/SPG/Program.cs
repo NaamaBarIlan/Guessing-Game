@@ -58,15 +58,10 @@ namespace SPG
                 Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
-                Console.WriteLine($"Your guess? ");
+                
+                char userGuess = ReadGuess(guessedLettersBuilder.ToString());
 
-                string userInput = Console.ReadLine();
-
-                // case-insensitive - convert user input to upper case 
-                string upperInput = userInput.ToUpper();
-
-                // append user input to guessed letters string
-                guessedLettersBuilder.Append(upperInput);
+                guessedLettersBuilder.Append(userGuess);
 
                 guessesCounter--;
             }
@@ -146,9 +141,7 @@ namespace SPG
                     inputReadable = true;
                     guess = userInput;
                 }
-
             }
-
             return guess;
         }
 
