@@ -8,11 +8,11 @@ namespace SPG
     {
         static void Main(string[] args)
         {
-            Intro();
-            Console.ReadLine();
-            Console.Clear();
+            //Intro();
+            //Console.ReadLine();
+            //Console.Clear();
 
-            PlayOneGame("PROGRAMER");
+            PlayOneGame("PRO");
 
             //Testing CreateHint:
             //CreateHint("PROGRAMMER", "R");
@@ -52,13 +52,10 @@ namespace SPG
         {
             int guessesCounter = 8;
             StringBuilder guessedLettersBuilder = new StringBuilder();
-            string guessedLetters = guessedLettersBuilder.ToString();
-            //string CreateHint = "--------";
-
 
             while (guessesCounter > 0)
             {
-                Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLetters)}");
+                Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
                 Console.WriteLine($"Your guess? ");
