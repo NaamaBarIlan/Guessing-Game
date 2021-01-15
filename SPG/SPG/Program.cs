@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace SPG
@@ -7,17 +8,13 @@ namespace SPG
     {
         static void Main(string[] args)
         {
-            Intro();
-            Console.ReadLine();
-            Console.Clear();
-
-            //Testing the hint:
-            //CreateHint("PROGRAMMER", "R");
+            //Intro();
             //Console.ReadLine();
+            //Console.Clear();
 
-            //PlayOneGame("PROGRAMER");
+            PlayOneGame("PRO");
+
             //displayHangman();
-            //readGuess();
             //getRandomWord();
             //stats();
         }
@@ -46,25 +43,22 @@ namespace SPG
         static int PlayOneGame(string secretWord)
         {
             int guessesCounter = 8;
+            bool userWins = false;
             StringBuilder guessedLettersBuilder = new StringBuilder();
-            string guessedLetters = guessedLettersBuilder.ToString();
-            string CreateHint = "--------";
 
-
-            while (guessesCounter > 0)
+            while (guessesCounter > 0 && !userWins)
             {
-                Console.WriteLine($"Secret word: {CreateHint}");
+                Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
                 Console.WriteLine($"Guesses left: {guessesCounter}");
-                Console.WriteLine($"Your guess? ");
+                
+                char userGuess = ReadGuess(guessedLettersBuilder.ToString());
 
-                string userInput = Console.ReadLine();
+                GuessEval(secretWord, userGuess);
 
-                // case-insensitive - convert user input to upper case 
-                string upperInput = userInput.ToUpper();
+                guessedLettersBuilder.Append(userGuess);
 
-                // append user input to guessed letters string
-                guessedLettersBuilder.Append(upperInput);
+                // if guessedLettersBuilder has no dashes, user won
 
                 guessesCounter--;
             }
@@ -122,6 +116,78 @@ namespace SPG
         /// <returns></returns>
         static char ReadGuess(string guessedLetters)
         {
+            bool inputReadable = false;
+            char guess = '\0';
+
+            while (!inputReadable)
+            {
+                Console.WriteLine("Your guess? ");
+
+                char userInput = char.Parse(Console.ReadLine().ToUpper());
+
+                if (!Char.IsLetter(userInput))
+                {
+                    Console.WriteLine("Type a single letter from A-Z.");
+                }
+                else if(AlreadyGuessed(guessedLetters, userInput))
+                {
+                    Console.WriteLine("You already guessed that letter.");
+                }
+                else
+                {
+                    inputReadable = true;
+                    guess = userInput;
+                }
+            }
+            return guess;
+        }
+
+        /// <summary>
+        /// Compares the letter that the user guessed to
+        /// the string of letters that were guessed in previous turns.
+        /// </summary>
+        /// <param name="guessedLetters">A string of all the letter the user guessed in the current game</param>
+        /// <param name="guess">The letter the user guessed in the current turn</param>
+        /// <returns>True if the letter exists in the string and therefor already guessed</returns>
+        static bool AlreadyGuessed(string guessedLetters, char guess)
+        {
+            for (int i = 0; i < guessedLetters.Length; i++)
+            {
+                if (guess.Equals(guessedLetters[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Evaluates the letter the user guessed and
+        /// prints out feedback to the console.
+        /// </summary>
+        /// <param name="secretWord">The secret word for the user to guess</param>
+        /// <param name="guess">The letter that the user entered in the current turn</param>
+        static void GuessEval(string secretWord, char guess)
+        {
+            bool correctGuess = false;
+
+            for (int i = 0; i < secretWord.Length; i++)
+            {
+                if (guess.Equals(secretWord[i]))
+                {
+                    correctGuess = true;
+                }
+            }
+
+            if (correctGuess)
+            {
+                Console.WriteLine("Correct!");
+            }
+            else
+            {
+                Console.WriteLine("Incorrect.");
+            }
 
         }
     }
