@@ -40,5 +40,4 @@ Then select and open ```SPG.sln```
 1.1: *Added game intro and play one game* - 11 Jan 2021 <br>
 1.0: *Project Setup* - 10 Jan 2021  <br>
 
-
 ------------------------------
