@@ -124,17 +124,17 @@ namespace SPG
 
             while (!inputReadable)
             {
-                Console.WriteLine($"Your guess? ");
+                Console.WriteLine("Your guess? ");
 
                 char userInput = char.Parse(Console.ReadLine().ToUpper());
 
                 if (!Char.IsLetter(userInput))
                 {
-                    Console.WriteLine($"Type a single letter from A-Z.");
+                    Console.WriteLine("Type a single letter from A-Z.");
                 }
                 else if(AlreadyGuessed(guessedLetters, userInput))
                 {
-                    Console.WriteLine($"You already guessed that letter.");
+                    Console.WriteLine("You already guessed that letter.");
                 }
                 else
                 {
@@ -163,6 +163,29 @@ namespace SPG
             }
 
             return false;
+        }
+
+        static void GuessFeedback(string secretWord, char guess)
+        {
+            bool correctGuess = false;
+
+            for (int i = 0; i < secretWord.Length; i++)
+            {
+                if (guess.Equals(secretWord[i]))
+                {
+                    correctGuess = true;
+                }
+            }
+
+            if (correctGuess)
+            {
+                Console.WriteLine("Correct!");
+            }
+            else
+            {
+                Console.WriteLine("Incorrect.");
+            }
+
         }
     }
 }
