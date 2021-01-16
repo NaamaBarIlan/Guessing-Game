@@ -174,17 +174,7 @@ namespace SPG
         /// <param name="guess">The letter that the user entered in the current turn</param>
         static void GuessEval(string secretWord, char guess)
         {
-            bool correctGuess = false;
-
-            for (int i = 0; i < secretWord.Length; i++)
-            {
-                if (guess.Equals(secretWord[i]))
-                {
-                    correctGuess = true;
-                }
-            }
-
-            if (correctGuess)
+            if (secretWord.Contains(guess))
             {
                 Console.WriteLine("Correct!");
             }
@@ -192,7 +182,6 @@ namespace SPG
             {
                 Console.WriteLine("Incorrect.");
             }
-
         }
 
         /// <summary>
