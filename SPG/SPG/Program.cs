@@ -14,7 +14,7 @@ namespace SPG
 
             PlayOneGame("PRO");
 
-            //TODO
+            //TODO:
             //displayHangman();
             //getRandomWord();
             //stats();
@@ -60,16 +60,17 @@ namespace SPG
                 GuessEval(secretWord, userGuess);
 
                 guessedLettersBuilder.Append(userGuess);
+                //Console.WriteLine($"guessedLetters: {guessedLetters}");
 
                 if (WinEval(CreateHint(secretWord, guessedLettersBuilder.ToString())))
                 {
                     userWins = true;
-                    Console.WriteLine($"You win! My word was {secretWord}");
+                    Console.WriteLine($"You win! My word was \"{secretWord}\"");
                 }
 
                 guessesCounter--;
             }
-            
+
             return guessesCounter;
         }
 
