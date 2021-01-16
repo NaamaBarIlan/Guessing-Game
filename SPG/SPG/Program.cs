@@ -124,23 +124,23 @@ namespace SPG
                 try
                 {
                     guess = char.Parse(userInput.ToUpper());
+
+                    if (!Char.IsLetter(guess))
+                    {
+                        Console.WriteLine("Type a single letter from A-Z.");
+                    }
+                    else if (AlreadyGuessed(guessedLetters, guess))
+                    {
+                        Console.WriteLine("You already guessed that letter.");
+                    }
+                    else
+                    {
+                        inputReadable = true;
+                    }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("You typed more than one letter.");
-                }
-
-                if (!Char.IsLetter(guess))
-                {
-                    Console.WriteLine("Type a single letter from A-Z.");
-                }
-                else if(AlreadyGuessed(guessedLetters, guess))
-                {
-                    Console.WriteLine("You already guessed that letter.");
-                }
-                else
-                {
-                    inputReadable = true;
                 }
             }
             return guess;
