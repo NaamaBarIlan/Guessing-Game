@@ -8,9 +8,9 @@ namespace SPG
     {
         static void Main(string[] args)
         {
-            //Intro();
-            //Console.ReadLine();
-            //Console.Clear();
+            Intro();
+            Console.ReadLine();
+            Console.Clear();
 
             PlayOneGame("PRO");
 
