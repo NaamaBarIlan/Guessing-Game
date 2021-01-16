@@ -46,8 +46,10 @@ namespace SPG
             int guessesCounter = 8;
             bool userWins = false;
             StringBuilder guessedLettersBuilder = new StringBuilder();
+            //string guessedLetters = guessedLettersBuilder.ToString();
+            //string hint = CreateHint(secretWord, guessedLettersBuilder.ToString());
 
-            while (guessesCounter > 0 || !userWins)
+            while (guessesCounter > 0 && !userWins)
             {
                 Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
@@ -104,9 +106,6 @@ namespace SPG
             }
 
             string hint = hintBuilder.ToString();
-
-            // To test the hint:
-            //Console.WriteLine(hint);
 
             return hint;
         }
@@ -204,18 +203,14 @@ namespace SPG
         /// <returns>true if the user has won the game, or false if they did not</returns>
         static bool UserWins(string hint)
         {
-            bool userWins = true;
-
-            for (int i = 0; i < hint.Length; i++)
+            if (hint.Contains("-"))
             {
-                if (hint[i].Equals("-"))
-                {
-                    userWins = false;
-                    break;
-                }
+                return false;
             }
-
-            return userWins;
+            else
+            {
+                return true;
+            }
         }
     }
 }
