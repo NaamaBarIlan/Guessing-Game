@@ -61,7 +61,7 @@ namespace SPG
 
                 guessedLettersBuilder.Append(userGuess);
 
-                if (UserWins(CreateHint(secretWord, guessedLettersBuilder.ToString())))
+                if (WinEval(CreateHint(secretWord, guessedLettersBuilder.ToString())))
                 {
                     userWins = true;
                     Console.WriteLine($"You win! My word was {secretWord}");
@@ -155,15 +155,14 @@ namespace SPG
         /// <returns>True if the letter exists in the string and therefor already guessed</returns>
         static bool AlreadyGuessed(string guessedLetters, char guess)
         {
-            for (int i = 0; i < guessedLetters.Length; i++)
+            if (guessedLetters.Contains(guess))
             {
-                if (guess.Equals(guessedLetters[i]))
-                {
-                    return true;
-                }
+                return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -190,7 +189,7 @@ namespace SPG
         /// </summary>
         /// <param name="hint"></param>
         /// <returns>true if the user has won the game, or false if they did not</returns>
-        static bool UserWins(string hint)
+        static bool WinEval(string hint)
         {
             if (hint.Contains("-"))
             {
