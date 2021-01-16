@@ -46,6 +46,8 @@ namespace SPG
             int guessesCounter = 8;
             bool userWins = false;
             StringBuilder guessedLettersBuilder = new StringBuilder();
+
+            //TODO: troubleshoot SB ToString:
             //string guessedLetters = guessedLettersBuilder.ToString();
             //string hint = CreateHint(secretWord, guessedLettersBuilder.ToString());
 
@@ -60,7 +62,6 @@ namespace SPG
                 GuessFeedback(secretWord, userGuess);
 
                 guessedLettersBuilder.Append(userGuess);
-                //Console.WriteLine($"guessedLetters: {guessedLetters}");
 
                 if (WinEval(CreateHint(secretWord, guessedLettersBuilder.ToString())))
                 {
@@ -118,20 +119,28 @@ namespace SPG
             {
                 Console.WriteLine("Your guess? ");
 
-                char userInput = char.Parse(Console.ReadLine().ToUpper());
+                string userInput = Console.ReadLine();
 
-                if (!Char.IsLetter(userInput))
+                try
+                {
+                    guess = char.Parse(userInput.ToUpper());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("You typed more than one letter.");
+                }
+
+                if (!Char.IsLetter(guess))
                 {
                     Console.WriteLine("Type a single letter from A-Z.");
                 }
-                else if(AlreadyGuessed(guessedLetters, userInput))
+                else if(AlreadyGuessed(guessedLetters, guess))
                 {
                     Console.WriteLine("You already guessed that letter.");
                 }
                 else
                 {
                     inputReadable = true;
-                    guess = userInput;
                 }
             }
             return guess;
