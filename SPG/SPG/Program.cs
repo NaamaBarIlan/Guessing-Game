@@ -8,13 +8,13 @@ namespace SPG
     {
         static void Main(string[] args)
         {
-            //Intro();
-            //Console.ReadLine();
-            //Console.Clear();
+            Intro();
+            Console.ReadLine();
+            Console.Clear();
 
             PlayOneGame("PRO");
 
-            //TODO
+            //TODO:
             //displayHangman();
             //getRandomWord();
             //stats();
@@ -46,8 +46,10 @@ namespace SPG
             int guessesCounter = 8;
             bool userWins = false;
             StringBuilder guessedLettersBuilder = new StringBuilder();
+            //string guessedLetters = guessedLettersBuilder.ToString();
+            //string hint = CreateHint(secretWord, guessedLettersBuilder.ToString());
 
-            while (guessesCounter > 0 || !userWins)
+            while (guessesCounter > 0 && !userWins)
             {
                 Console.WriteLine($"Secret word: {CreateHint(secretWord, guessedLettersBuilder.ToString())}");
                 Console.WriteLine($"Your guesses: {guessedLettersBuilder}");
@@ -55,19 +57,20 @@ namespace SPG
                 
                 char userGuess = ReadGuess(guessedLettersBuilder.ToString());
 
-                GuessEval(secretWord, userGuess);
+                GuessFeedback(secretWord, userGuess);
 
                 guessedLettersBuilder.Append(userGuess);
+                //Console.WriteLine($"guessedLetters: {guessedLetters}");
 
-                if (UserWins(CreateHint(secretWord, guessedLettersBuilder.ToString())))
+                if (WinEval(CreateHint(secretWord, guessedLettersBuilder.ToString())))
                 {
                     userWins = true;
-                    Console.WriteLine($"You win! My word was {secretWord}");
+                    Console.WriteLine($"You win! My word was \"{secretWord}\"");
                 }
 
                 guessesCounter--;
             }
-            
+
             return guessesCounter;
         }
 
@@ -83,17 +86,7 @@ namespace SPG
 
             foreach (char item in secretWord)
             {
-                bool charMatch = false;
-
-                for (int i = 0; i < guessedLetters.Length; i++)
-                {
-                    if (item.Equals(guessedLetters[i]))
-                    {
-                        charMatch = true;
-                    }
-                }
-
-                if (charMatch)
+                if (guessedLetters.Contains(item))
                 {
                     hintBuilder.Append(item);
                 }
@@ -104,9 +97,6 @@ namespace SPG
             }
 
             string hint = hintBuilder.ToString();
-
-            // To test the hint:
-            //Console.WriteLine(hint);
 
             return hint;
         }
@@ -156,15 +146,14 @@ namespace SPG
         /// <returns>True if the letter exists in the string and therefor already guessed</returns>
         static bool AlreadyGuessed(string guessedLetters, char guess)
         {
-            for (int i = 0; i < guessedLetters.Length; i++)
+            if (guessedLetters.Contains(guess))
             {
-                if (guess.Equals(guessedLetters[i]))
-                {
-                    return true;
-                }
+                return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -173,19 +162,9 @@ namespace SPG
         /// </summary>
         /// <param name="secretWord">The secret word for the user to guess</param>
         /// <param name="guess">The letter that the user entered in the current turn</param>
-        static void GuessEval(string secretWord, char guess)
+        static void GuessFeedback(string secretWord, char guess)
         {
-            bool correctGuess = false;
-
-            for (int i = 0; i < secretWord.Length; i++)
-            {
-                if (guess.Equals(secretWord[i]))
-                {
-                    correctGuess = true;
-                }
-            }
-
-            if (correctGuess)
+            if (secretWord.Contains(guess))
             {
                 Console.WriteLine("Correct!");
             }
@@ -193,7 +172,6 @@ namespace SPG
             {
                 Console.WriteLine("Incorrect.");
             }
-
         }
 
         /// <summary>
@@ -202,20 +180,16 @@ namespace SPG
         /// </summary>
         /// <param name="hint"></param>
         /// <returns>true if the user has won the game, or false if they did not</returns>
-        static bool UserWins(string hint)
+        static bool WinEval(string hint)
         {
-            bool userWins = true;
-
-            for (int i = 0; i < hint.Length; i++)
+            if (hint.Contains("-"))
             {
-                if (hint[i].Equals("-"))
-                {
-                    userWins = false;
-                    break;
-                }
+                return false;
             }
-
-            return userWins;
+            else
+            {
+                return true;
+            }
         }
     }
 }
