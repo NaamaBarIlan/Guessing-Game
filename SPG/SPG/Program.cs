@@ -85,17 +85,7 @@ namespace SPG
 
             foreach (char item in secretWord)
             {
-                bool charMatch = false;
-
-                for (int i = 0; i < guessedLetters.Length; i++)
-                {
-                    if (item.Equals(guessedLetters[i]))
-                    {
-                        charMatch = true;
-                    }
-                }
-
-                if (charMatch)
+                if (guessedLetters.Contains(item))
                 {
                     hintBuilder.Append(item);
                 }
