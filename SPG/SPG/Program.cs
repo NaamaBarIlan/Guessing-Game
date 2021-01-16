@@ -57,7 +57,7 @@ namespace SPG
                 
                 char userGuess = ReadGuess(guessedLettersBuilder.ToString());
 
-                GuessEval(secretWord, userGuess);
+                GuessFeedback(secretWord, userGuess);
 
                 guessedLettersBuilder.Append(userGuess);
                 //Console.WriteLine($"guessedLetters: {guessedLetters}");
@@ -162,7 +162,7 @@ namespace SPG
         /// </summary>
         /// <param name="secretWord">The secret word for the user to guess</param>
         /// <param name="guess">The letter that the user entered in the current turn</param>
-        static void GuessEval(string secretWord, char guess)
+        static void GuessFeedback(string secretWord, char guess)
         {
             if (secretWord.Contains(guess))
             {
